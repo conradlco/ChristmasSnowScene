@@ -13,8 +13,14 @@ public class SnowFlake {
   private double y;
   private int depth;
   private final int speed;
+  private boolean falling = true;
+  private int age = 0;
 
   public SnowFlake(int x, int y, int depth, int speed) {
+    if (depth < 1 || depth > MAX_DEPTH) {
+      throw new IllegalArgumentException("Depth must be at least 1 and at most " + MAX_DEPTH + " but was " + depth);
+    }
+
     this.x = x;
     this.y = y;
     this.depth = depth;
@@ -30,7 +36,10 @@ public class SnowFlake {
   }
 
   public void fall() {
-    this.y += fallSpeed();
+    age++;
+    if (falling) {
+      this.y += fallSpeed();
+    }
   }
 
   public void paint(Graphics g) {
@@ -40,5 +49,9 @@ public class SnowFlake {
     g.fillOval((int) (x + 1), (int) (y + 1), size, size);
     g.setColor(Color.white);
     g.fillOval((int) x, (int) y, size, size);
+  }
+
+  public void atRest() {
+    falling = false;
   }
 }

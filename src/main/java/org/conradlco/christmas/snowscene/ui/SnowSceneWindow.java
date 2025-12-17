@@ -23,7 +23,7 @@ public class SnowSceneWindow extends JFrame {
         setSize(1000, 750);
         setLocationRelativeTo(null);
 
-        snowScenePanel = new SnowScenePanel();
+        snowScenePanel = new SnowScenePanel(getWidth(), getHeight());
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(snowScenePanel, BorderLayout.CENTER);
     }
